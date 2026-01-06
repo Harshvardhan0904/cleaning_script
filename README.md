@@ -1,113 +1,122 @@
-📘 Data Cleaning Script – README
+# 📘 Data Cleaning Script
 
-This project has a Python class DataCleaner.
-It takes a DataFrame and cleans it step by step.
-The idea is simple: remove trash data and give a clean dataset back.
+A Python class `DataCleaner` that takes a DataFrame and cleans it step by step. Remove trash data and get a clean dataset back.
 
-🚀 Features
+---
 
-removes duplicates
+## 🚀 Features
 
-fixes column names
+- ✅ Removes duplicates
+- ✅ Fixes column names (lowercase, underscore-separated)
+- ✅ Finds date and ID columns automatically
+- ✅ Converts date columns to datetime
+- ✅ Fills missing values (mean, mode, ffill, median)
+- ✅ Checks null percentage
+- ✅ Prints statistics for numeric columns
+- ✅ IQR (Interquartile Range) check
+- ✅ Plots histograms + scatter plots
+- ✅ Logs every step
 
-finds date and id columns
+---
 
-converts date columns
+## 📦 Requirements
 
-fills missing values (mean, mode, ffill, median)
+Install dependencies:
 
-checks null %
-
-prints stats for numbers
-
-IQR check
-
-plots histograms + scatter plots
-
-logs every step
-
-📦 Requirements
-
-Install these:
-
+```bash
 pip install pandas numpy seaborn matplotlib
+```
 
+**Python version:** 3.8+ recommended
 
-Python version: 3.8+ recommended.
+---
 
-📁 How to Use
-1️⃣ import the file
+## 📁 How to Use
+
+### 1️⃣ Import the file
+
+```python
 from data_cleaner import DataCleaner
+```
 
-2️⃣ load your data
+### 2️⃣ Load your data
+
+```python
 import pandas as pd
 
 df = pd.read_csv("your_file.csv")
+```
 
-3️⃣ clean the data
+### 3️⃣ Clean the data
+
+```python
 cleaner = DataCleaner(df)
 clean_df = cleaner.cleaning_data()
+```
 
-4️⃣ see graphs
+### 4️⃣ See graphs
+
+```python
 cleaner.graph_plot()
+```
 
-🧠 What the Cleaning Function Does
-✔ removes duplicates
-✔ cleans column names
+---
 
-everything goes lowercase and spaces turn into _.
+## 🧠 What the Cleaning Function Does
 
-✔ date detection
+### ✔ Removes duplicates
+Automatically detects and removes duplicate rows.
 
-if a column has “date” in the name → convert to date.
+### ✔ Cleans column names
+Everything goes lowercase and spaces turn into `_`.
 
-✔ null filling
+### ✔ Date detection
+If a column has "date" in the name → converts to datetime.
 
-numbers → mean
+### ✔ Null filling
+- **Numbers** → mean
+- **Strings** → mode
+- **Date/boolean/other** → forward fill
+- **Second pass:**
+  - Categorical → mode
+  - Numeric → median
+  - Else → 0
 
-strings → mode
+### ✔ IQR
+Prints Q1, Q3, and IQR for numeric columns.
 
-date/boolean/other → forward fill
+### ✔ Plots
+- Histogram plots for numeric columns
+- Histogram plots for categorical columns
+- Scatter plots for numeric columns
+- Scatter plots for categorical columns
 
-second pass:
+---
 
-cat → mode
+## 📝 Logging
 
-num → median
+A folder `logs/` gets created. Every step is logged inside:
 
-else → 0
-
-✔ IQR
-
-It prints Q1, Q3, and IQR for numeric columns.
-
-✔ plots
-
-hist plots for numeric
-
-hist plots for categorical
-
-scatter for numeric
-
-scatter for categorical
-
-📝 Logging
-
-A folder logs/ gets created.
-Every step is logged inside:
-
+```
 logs/data_cleaning.log
+```
 
-📊 Example Output
+---
 
-dataset shape
+## 📊 Example Output
 
-null percentage
+- Dataset shape
+- Null percentage
+- Duplicate count
+- Cleaned statistics
+- IQR values
+- All plots
 
-duplicate count
 
-cleaned stats
+---
 
-IQR values
+## 🤝 Contributing
 
-all plots
+Contributions are welcome! Please open an issue or submit a pull request.
+
+---
